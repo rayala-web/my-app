@@ -1,8 +1,14 @@
 import React, { useState } from 'react';
 import ReactDOM from 'react-dom'
 import './index.css';
+import CardApp from './cards';
+import {Route, Link, BrowserRouter as Router, Switch} from 'react-router-dom'
+import SignUp from './signup';
+import NotFound from './notfound';
+import Family from './family';
+import StarMatch from './star';
 //#region
-/*
+
 class Square extends React.Component {
     render() {
       return (
@@ -99,7 +105,7 @@ class Square extends React.Component {
     }
   }
 
-  class Game extends React.Component {
+  class App extends React.Component {
     render() {
       return (
         <div className="game">
@@ -117,7 +123,7 @@ class Square extends React.Component {
     }
   }
 
-
+/*
   // ========================================
 
   ReactDOM.render(
@@ -139,107 +145,40 @@ class Button extends React.Component {
   }
 }
 
-class Submit extends React.Component {
+const routing = (
+  <Router>
+  <div>
+    <ul>
+      <li>
+      <Link to='/'>Home</Link>
+      </li>
+      <li>
+        <Link to='/star'>Star</Link>
+      </li>
+      <li>
+      <Link to='/signup'>Sign Up</Link>
+      </li>
+      <li>
+      <Link to='/cards'>Cards</Link>
+      </li>
+      <li>
+        <Link to='/parent'>Parentandchild</Link>
+      </li>
+    </ul> 
+  <Switch>
+  <Route exact path='/' component={App} />
+  <Route path='/star' component={StarMatch} />
+  <Route path='/cards' component={CardApp} />
+  <Route path='/signup' component={SignUp} />
+  <Route path='/parent' component={Family}/>
+  <Route path='*' component={NotFound} />
 
-  render() {
-    //const handleClick = () => this.props.onClick();
-    return (
-      <input type="submit" value={this.props.textValue}>
-      </input>
-    )
-  }
-}
+  </Switch>
+  </div>
+</Router> 
+)
 
-class Password extends React.Component {
-  render() {
-    return (
-      <div>
-        <lable>{this.props.label} </lable>
-        <input type="password" name={this.props.id} ref={this.props.ref} />
-      </div>
-    );
-  }
-}
-
-class Username extends React.Component {
-  render() {
-    return (
-      <div>
-        <lable>{this.props.label}</lable>
-        <input type="text" name={this.props.id}></input>
-      </div>
-    )
-  }
-}
-
-class App extends React.Component {
-
-  passwordInput = React.createRef();
-  confirmPasswordInput = React.createRef();
-
-  handleSubmit = (event) => {
-    event.preventDefault();
-    console.log(this.passwordInput.current.value == this.confirmPasswordInput.current.value);
-  }
-
-  render() {
-
-    return (
-      /*<div>
-        <Button onClickFunction={incrementCounter} increment={1} />
-        <Button onClickFunction={incrementCounter} increment={5} />
-        <Button onClickFunction={incrementCounter} increment={10} />
-        <Button onClickFunction={incrementCounter} increment={100} />
-         <Button onClickFunction={incrementCounter} increment={1000} />
-        <Display message={counter}/>
-      </div>*/
-      
-      <div>
-        <form onSubmit={this.handleSubmit}>
-        <Username id="txtUserName" label="User Name"></Username> <br />
-        <div>
-          <label>Password </label>
-          <input type="password" name="txtConfirmPassword" ref={this.passwordInput} />
-        </div><br/>
-        <div>
-        <label>Confirm Password </label>
-        <input type="password" id="txtConfirmPassword" label="Confirm Password" ref={this.confirmPasswordInput}></input><br />
-        </div><br/>
-        <Submit textValue="Login"></Submit><br />
-        </form>
-      </div>
-    );
-  }
-}
-
-/*
-class Card extends React.Component {
-  render() {
-    return (
-      <div className="github_profile">
-        <img src={this.props.image}></img>
-        <div className="info">
-          <div className="name">name here...</div>
-          <div className="company">company here..</div>
-        </div>
-      </div>
-    )
-  }
-}
-
-class App extends React.Component {
-  render(){
-    return (
-      <div>
-        <div class="header">{this.props.title}</div>
-        <Card image="https://placehold.it/75"/>
-        
-      </div>
-    )
-  }
-}
-*/
 ReactDOM.render(
-  <App title="The Github Cards App" />,
+  routing,
   document.getElementById('root'),
 );
